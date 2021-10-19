@@ -12,7 +12,7 @@ export default function HeroSection(props) {
       className="content__row content__row--full-width promo__section"
       data-id={_.get(section, "section_id", null)}
     >
-      <h1 class="text-xl text-center my-20">
+      <h1 class="text-xl sm:text-center my-20">
         <Typewriter
           options={{
             strings: [
