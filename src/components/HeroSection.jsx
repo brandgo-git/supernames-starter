@@ -56,6 +56,7 @@ export default function HeroSection(props) {
           </TypistLoop>
         </span>
       </h1> */}
+      AAA
       <TextTransition
         inline={true}
         delay={100}
