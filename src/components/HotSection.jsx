@@ -111,6 +111,16 @@ export default props => {
     }
   `)
 
+  const isBrowser = typeof window !== "undefined"
+  const [width, setWidth] = React.useState(isBrowser ? window.innerWidth : 0)
+
+  React.useEffect(() => {
+    if (!isBrowser) return false
+    const handleWindowResize = () => setWidth(window.innerWidth)
+    window.addEventListener("resize", handleWindowResize)
+    return () => window.removeEventListener("resize", handleWindowResize)
+  }, [])
+
   // Randomizer
   hot = hot.edges.sort(() => Math.random() - 0.5)
 
@@ -119,54 +129,105 @@ export default props => {
       data-id={_.get(section, "section_id", null)}
       className="hot_section"
     >
-      <Slider {...settings}>
-        {hot.map(
-          ({
-            node: {
-              data: { title, logo, price, slug },
-            },
-          }) => (
-            <div key={title}>
-              {/* <FavoriteCardItems
+      {width > 640 ? (
+        <Slider {...settings}>
+          {hot.map(
+            ({
+              node: {
+                data: { title, logo, price, slug },
+              },
+            }) => (
+              <div key={title}>
+                {/* <FavoriteCardItems
                             name={title}
                             id={title}
                             price={price}
                             slug={slug}
                           /> */}
-              <Link to={`/${slug}`} key={title}>
-                {logo ? (
-                  <div
-                    style={{
-                      height: "10rem",
-                      p: 3,
-                      borderBottom: "1px solid #e7e8f3",
-                    }}
-                  >
-                    {title}
-                    <Img
-                      alt="image"
-                      image={
-                        logo
-                          ? logo.localFiles[0].childImageSharp.gatsbyImageData
-                          : null
-                      }
-                    />
-                  </div>
-                ) : (
-                  <p
-                    style={{
-                      fontFamily: "batangas",
-                      lineHeight: "0",
-                    }}
-                  >
-                    {title}
-                  </p>
-                )}
-              </Link>
-            </div>
-          )
-        )}
-      </Slider>
+                <Link to={`/${slug}`} key={title}>
+                  {logo ? (
+                    <div
+                      style={{
+                        height: "10rem",
+                        p: 3,
+                        borderBottom: "1px solid #e7e8f3",
+                      }}
+                    >
+                      {title}
+                      <Img
+                        alt="image"
+                        image={
+                          logo
+                            ? logo.localFiles[0].childImageSharp.gatsbyImageData
+                            : null
+                        }
+                      />
+                    </div>
+                  ) : (
+                    <p
+                      style={{
+                        fontFamily: "batangas",
+                        lineHeight: "0",
+                      }}
+                    >
+                      {title}
+                    </p>
+                  )}
+                </Link>
+              </div>
+            )
+          )}
+        </Slider>
+      ) : (
+        <div>
+          {hot.map(
+            ({
+              node: {
+                data: { title, logo, price, slug },
+              },
+            }) => (
+              <div key={title}>
+                {/* <FavoriteCardItems
+                            name={title}
+                            id={title}
+                            price={price}
+                            slug={slug}
+                          /> */}
+                <Link to={`/${slug}`} key={title}>
+                  {logo ? (
+                    <div
+                      style={{
+                        height: "10rem",
+                        p: 3,
+                        borderBottom: "1px solid #e7e8f3",
+                      }}
+                    >
+                      {title}
+                      <Img
+                        alt="image"
+                        image={
+                          logo
+                            ? logo.localFiles[0].childImageSharp.gatsbyImageData
+                            : null
+                        }
+                      />
+                    </div>
+                  ) : (
+                    <p
+                      style={{
+                        fontFamily: "batangas",
+                        lineHeight: "0",
+                      }}
+                    >
+                      {title}
+                    </p>
+                  )}
+                </Link>
+              </div>
+            )
+          )}
+        </div>
+      )}
     </section>
   )
 }

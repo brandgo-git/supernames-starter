@@ -123,6 +123,16 @@ export default props => {
     }
   `)
 
+  const isBrowser = typeof window !== "undefined"
+  const [width, setWidth] = React.useState(isBrowser ? window.innerWidth : 0)
+
+  React.useEffect(() => {
+    if (!isBrowser) return false
+    const handleWindowResize = () => setWidth(window.innerWidth)
+    window.addEventListener("resize", handleWindowResize)
+    return () => window.removeEventListener("resize", handleWindowResize)
+  }, [])
+
   // Randomizer
   featured = featured.edges.sort(() => Math.random() - 0.5)
 
@@ -130,7 +140,7 @@ export default props => {
     <section
       data-id={_.get(section, "section_id", null)}
       className="featured_section"
-    >
+    >{width > 640 ? (
       <Slider {...settings}>
         {featured.map(
           ({
@@ -178,7 +188,7 @@ export default props => {
             </div>
           )
         )}
-      </Slider>
+      </Slider> ) : "BBB" }
     </section>
   )
 }
