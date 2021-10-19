@@ -190,7 +190,7 @@ export default props => {
           )}
         </Slider>
       ) : (
-        "BBB"
+        ""
       )}
     </section>
   )
