@@ -140,59 +140,6 @@ export default props => {
     <section
       data-id={_.get(section, "section_id", null)}
       className="featured_section"
-    >
-      {width > 640 ? (
-        <Slider {...settings}>
-          {featured.map(
-            ({
-              node: {
-                data: { title, logo, price, slug },
-              },
-            }) => (
-              <div key={title}>
-                {/* <FavoriteCardItems
-                            name={title}
-                            id={title}
-                            price={price}
-                            slug={slug}
-                          /> */}
-                <Link to={`/${slug}`} key={title}>
-                  {logo ? (
-                    <div
-                      style={{
-                        height: "10rem",
-                        p: 3,
-                        borderBottom: "1px solid #e7e8f3",
-                      }}
-                    >
-                      {title}
-                      <Img
-                        alt="image"
-                        image={
-                          logo
-                            ? logo.localFiles[0].childImageSharp.gatsbyImageData
-                            : null
-                        }
-                      />
-                    </div>
-                  ) : (
-                    <p
-                      style={{
-                        fontFamily: "batangas",
-                        lineHeight: "0",
-                      }}
-                    >
-                      {title}
-                    </p>
-                  )}
-                </Link>
-              </div>
-            )
-          )}
-        </Slider>
-      ) : (
-        "BBB"
-      )}
-    </section>
+    ></section>
   )
 }
