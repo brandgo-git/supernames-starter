@@ -202,7 +202,6 @@ export default props => {
                         borderBottom: "1px solid #e7e8f3",
                       }}
                     >
-                      {title}
                       <Img
                         alt="image"
                         image={
@@ -218,7 +217,9 @@ export default props => {
                         fontFamily: "batangas",
                         lineHeight: "0",
                       }}
-                    ></p>
+                    >
+                      {title}
+                    </p>
                   )}
                 </Link>
               </div>
