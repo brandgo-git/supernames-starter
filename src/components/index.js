@@ -2,10 +2,12 @@
 
 import HeroSection from "@components/HeroSection"
 import FeaturedSection from "@components/FeaturedSection"
+import HotSection from "@components/HotSection"
 
-export { HeroSection, FeaturedSection }
+export { HeroSection, FeaturedSection, HotSection }
 
 export default {
   HeroSection,
   FeaturedSection,
+  HotSection,
 }
